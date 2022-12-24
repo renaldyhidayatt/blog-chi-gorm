@@ -12,22 +12,22 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type categoryHandler struct {
-	category dao.CategoryDao
+type articleHandler struct {
+	article dao.ArticleDao
 }
 
-func NewCategoryHandler(category dao.CategoryDao) *categoryHandler {
-	return &categoryHandler{category: category}
+func NewArticleHandler(article dao.ArticleDao) *articleHandler {
+	return &articleHandler{article: article}
 }
 
-func (h *categoryHandler) GetAll(w http.ResponseWriter, r *http.Request) {
+func (h *articleHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 	}
 
-	set, err, totalPages := h.category.GetAll(pagination)
+	set, err, totalPages := h.article.GetAll(pagination)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
@@ -43,15 +43,10 @@ func (h *categoryHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *categoryHandler) FindCategory(w http.ResponseWriter, r *http.Request) {
-	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+func (h *articleHandler) FindArticle(w http.ResponseWriter, r *http.Request) {
+	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 
-	if err != nil {
-		response.ResponseError(w, http.StatusInternalServerError, err)
-		return
-	}
-
-	res, err := h.category.FindCategory(Id)
+	res, err := h.article.FindArticle(Id)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
@@ -61,35 +56,65 @@ func (h *categoryHandler) FindCategory(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *categoryHandler) CreateCategory(w http.ResponseWriter, r *http.Request) {
-	var category request.CategoryRequest
-	err := json.NewDecoder(r.Body).Decode(&category)
+func (h *articleHandler) CreateArticle(w http.ResponseWriter, r *http.Request) {
+	var articles request.ArticleRequest
+	err := json.NewDecoder(r.Body).Decode(&articles)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 
-	category.Prepare()
-	err = category.Validate()
+	articles.Prepare()
+	err = articles.Validate()
 
 	if err != nil {
 		response.ResponseError(w, http.StatusBadRequest, err)
 		return
 	}
 
-	res, err := h.category.CreateCategory(category)
+	get, err := h.article.CreateArticle(articles)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	response.ResponseMessage(w, "Berhasil membuat data", res, http.StatusCreated)
+	response.ResponseMessage(w, "Berhasil membuat data", get, http.StatusCreated)
 
 }
 
-func (h *categoryHandler) UpdateCategory(w http.ResponseWriter, r *http.Request) {
+func (h *articleHandler) UpdateArticle(w http.ResponseWriter, r *http.Request) {
+	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+
+	var article request.ArticleRequest
+	err := json.NewDecoder(r.Body).Decode(&article)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusUnprocessableEntity, err)
+		return
+	}
+
+	article.Prepare()
+	err = article.Validate()
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	get, err := h.article.UpdateArticle(article, Id)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusInternalServerError, err)
+		return
+	}
+
+	response.ResponseMessage(w, "Berhasil mengubah data", get, http.StatusOK)
+
+}
+
+func (h *articleHandler) DeleteArticle(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 
 	if err != nil {
@@ -97,48 +122,13 @@ func (h *categoryHandler) UpdateCategory(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	var category request.CategoryRequest
-
-	err = json.NewDecoder(r.Body).Decode(&category)
-
-	if err != nil {
-		response.ResponseError(w, http.StatusUnprocessableEntity, err)
-		return
-	}
-
-	category.Prepare()
-	err = category.Validate()
-
-	if err != nil {
-		response.ResponseError(w, http.StatusBadRequest, err)
-		return
-	}
-
-	res, err := h.category.UpdateCategory(category, Id)
+	get, err := h.article.DeleteArticle(Id)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	response.ResponseMessage(w, "Berhasil mengubah data", res, http.StatusOK)
+	response.ResponseMessage(w, "Berhasil menghapus data", get, http.StatusOK)
 
-}
-
-func (h *categoryHandler) Delete(w http.ResponseWriter, r *http.Request) {
-	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
-
-	if err != nil {
-		response.ResponseError(w, http.StatusInternalServerError, err)
-		return
-	}
-
-	res, err := h.category.DeleteCategory(Id)
-
-	if err != nil {
-		response.ResponseError(w, http.StatusInternalServerError, err)
-		return
-	} else {
-		response.ResponseMessage(w, "Berhasil menghapus data", res, http.StatusOK)
-	}
 }

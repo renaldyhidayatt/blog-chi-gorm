@@ -5,7 +5,7 @@ import (
 	"blog-chi-gorm/payloads/request"
 )
 
-type TagRepository interface {
+type TagDao interface {
 	GetAll(*request.Pagination) (interface{}, error, int)
 	FindTag(int64) (entity.Tag, error)
 	CreateTag(request.TagRequest) (bool, error)

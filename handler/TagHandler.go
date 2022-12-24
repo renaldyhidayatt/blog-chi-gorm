@@ -12,22 +12,22 @@ import (
 	"github.com/go-chi/chi/v5"
 )
 
-type categoryHandler struct {
-	category dao.CategoryDao
+type tagHandler struct {
+	tag dao.TagDao
 }
 
-func NewCategoryHandler(category dao.CategoryDao) *categoryHandler {
-	return &categoryHandler{category: category}
+func NewTagHandler(tag dao.TagDao) *tagHandler {
+	return &tagHandler{tag: tag}
 }
 
-func (h *categoryHandler) GetAll(w http.ResponseWriter, r *http.Request) {
+func (h *tagHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 	}
 
-	set, err, totalPages := h.category.GetAll(pagination)
+	set, err, totalPages := h.tag.GetAll(pagination)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
@@ -43,15 +43,15 @@ func (h *categoryHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *categoryHandler) FindCategory(w http.ResponseWriter, r *http.Request) {
-	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+func (h *tagHandler) FindTag(w http.ResponseWriter, r *http.Request) {
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_tag"), 10, 64)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	res, err := h.category.FindCategory(Id)
+	res, err := h.tag.FindTag(Id)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
@@ -61,79 +61,78 @@ func (h *categoryHandler) FindCategory(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (h *categoryHandler) CreateCategory(w http.ResponseWriter, r *http.Request) {
-	var category request.CategoryRequest
-	err := json.NewDecoder(r.Body).Decode(&category)
+func (h *tagHandler) CreateTag(w http.ResponseWriter, r *http.Request) {
+	var tags request.TagRequest
+	err := json.NewDecoder(r.Body).Decode(&tags)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 
-	category.Prepare()
-	err = category.Validate()
+	tags.Prepare()
+	err = tags.Validate()
 
 	if err != nil {
 		response.ResponseError(w, http.StatusBadRequest, err)
 		return
 	}
 
-	res, err := h.category.CreateCategory(category)
+	get, err := h.tag.CreateTag(tags)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	response.ResponseMessage(w, "Berhasil membuat data", res, http.StatusCreated)
+	response.ResponseMessage(w, "Berhasil membuat data", get, http.StatusCreated)
 
 }
 
-func (h *categoryHandler) UpdateCategory(w http.ResponseWriter, r *http.Request) {
-	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+func (h *tagHandler) UpdateTag(w http.ResponseWriter, r *http.Request) {
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_tag"), 10, 64)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	var category request.CategoryRequest
-
-	err = json.NewDecoder(r.Body).Decode(&category)
+	var tag request.TagRequest
+	err = json.NewDecoder(r.Body).Decode(&tag)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusUnprocessableEntity, err)
 		return
 	}
 
-	category.Prepare()
-	err = category.Validate()
+	tag.Prepare()
+	err = tag.Validate()
 
 	if err != nil {
 		response.ResponseError(w, http.StatusBadRequest, err)
 		return
 	}
 
-	res, err := h.category.UpdateCategory(category, Id)
+	get, err := h.tag.UpdateTag(tag, Id)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	response.ResponseMessage(w, "Berhasil mengubah data", res, http.StatusOK)
+	response.ResponseMessage(w, "Berhasil mengubah data", get, http.StatusOK)
 
 }
 
-func (h *categoryHandler) Delete(w http.ResponseWriter, r *http.Request) {
-	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+func (h *tagHandler) Delete(w http.ResponseWriter, r *http.Request) {
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_tag"), 10, 64)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)
 		return
 	}
 
-	res, err := h.category.DeleteCategory(Id)
+	res, err := h.tag.DeleteTag(Id)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)

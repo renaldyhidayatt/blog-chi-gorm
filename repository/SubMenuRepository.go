@@ -209,22 +209,3 @@ func (r *subMenuRepository) DeleteSubMenu(idMenu int64, idSubMenu int64) (bool, 
 
 	return true, nil
 }
-
-func (r *subMenuRepository) FindById(idMenu int64, idSubMenu int64) (entity.SubMenu, error) {
-	var menu entity.Menu
-	var subMenu entity.SubMenu
-
-	r.db.Where("id_menu=?", idMenu).Take(&menu)
-
-	if menu.ID == 0 {
-		return entity.SubMenu{}, errors.New("id menu tidak ditemukan")
-	}
-
-	r.db.Where("id_menu=? AND id_sub_menu=?", menu.ID, idSubMenu).Take(&subMenu)
-
-	if subMenu.ID == 0 {
-		return entity.SubMenu{}, errors.New("id sub menu tidak ditemukan")
-	}
-
-	return subMenu, nil
-}

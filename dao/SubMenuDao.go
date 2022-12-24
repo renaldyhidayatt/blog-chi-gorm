@@ -11,5 +11,4 @@ type SubMenuDao interface {
 	CreateSubMenu(int64, []request.SubMenuRequest) (bool, error)
 	UpdateSubMenu(int64, int64, request.SubMenuRequest) (bool, error)
 	DeleteSubMenu(int64, int64) (bool, error)
-	FindById(int64, int64) (entity.SubMenu, error)
 }

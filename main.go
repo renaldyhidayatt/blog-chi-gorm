@@ -44,6 +44,15 @@ func main() {
 
 	routes.NewAuthRoutes("/auth", db, r)
 	routes.NewUserRoutes("/user", db, r)
+	routes.NewArticleRoutes("/article", db, r)
+	routes.NewCategoryRoutes("/category", db, r)
+	routes.NewRoleRoutes("/role", db, r)
+	routes.NewPermissionRoutes("/permission", db, r)
+	routes.NewPostRoutes("/posts", db, r)
+	routes.NewMenuRoutes("/menu", db, r)
+	routes.NewSubMenuRoutes("/submenu", db, r)
+	routes.NewTagRoutes("/tag", db, r)
+
 	serve := &http.Server{
 		Addr:         fmt.Sprintf(":%s", config.Config.PORT),
 		WriteTimeout: config.Config.WRITETIMEOUT * 10,
