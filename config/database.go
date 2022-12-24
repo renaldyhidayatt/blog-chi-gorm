@@ -1,6 +1,7 @@
 package config
 
 import (
+	"blog-chi-gorm/entity"
 	"fmt"
 	"time"
 
@@ -25,28 +26,16 @@ func DatabaseConnect() (*gorm.DB, error) {
 		return nil, err
 	}
 
+	err = db.AutoMigrate(&entity.User{}, &entity.Tag{}, &entity.SubMenu{}, &entity.Article{}, &entity.Role{}, &entity.PostTag{}, &entity.PostCategory{}, &entity.Post{}, &entity.Permission{}, &entity.Menu{}, &entity.Category{})
+
+	if err != nil {
+		return nil, err
+	}
+
 	sqlDb.SetMaxIdleConns(10)
 
 	sqlDb.SetMaxOpenConns(100)
 	sqlDb.SetConnMaxLifetime(time.Hour)
 
 	return db, nil
-}
-
-func CloseConnection(db *gorm.DB) error {
-	sqlDB, err := db.DB()
-
-	if err != nil {
-		return err
-	}
-
-	err = sqlDB.Ping()
-
-	if err != nil {
-		return err
-	}
-
-	sqlDB.Close()
-
-	return nil
 }

@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/badoux/checkmail v1.2.1
-	github.com/go-chi/chi v1.5.4
+	github.com/go-chi/chi/v5 v5.0.8
 	github.com/golang-jwt/jwt v3.2.2+incompatible
 	github.com/gosimple/slug v1.13.1
 	github.com/joho/godotenv v1.4.0
@@ -25,5 +25,6 @@ require (
 	github.com/jackc/pgx/v4 v4.17.2 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.4 // indirect
+	github.com/nfnt/resize v0.0.0-20180221191011-83c6a9932646 // indirect
 	golang.org/x/text v0.5.0 // indirect
 )

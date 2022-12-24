@@ -3,6 +3,7 @@ package main
 import (
 	"blog-chi-gorm/config"
 	"blog-chi-gorm/middlewares"
+	"blog-chi-gorm/routes"
 	"context"
 	"fmt"
 	"log"
@@ -12,8 +13,8 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/go-chi/chi"
-	"github.com/go-chi/chi/middleware"
+	"github.com/go-chi/chi/v5"
+	"github.com/go-chi/chi/v5/middleware"
 )
 
 func init() {
@@ -27,20 +28,22 @@ func main() {
 		runtime.GOMAXPROCS(runtime.NumCPU() / 2)
 	}
 
-	_, err := config.DatabaseConnect()
+	db, err := config.DatabaseConnect()
 
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	r.Use(middleware.Logger)
-	r.Use(middlewares.MiddlewareAuthentication)
 
 	r.Use(middlewares.MiddlewareCors)
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("Welcome"))
 	})
+
+	routes.NewAuthRoutes("/auth", db, r)
+	routes.NewUserRoutes("/user", db, r)
 	serve := &http.Server{
 		Addr:         fmt.Sprintf(":%s", config.Config.PORT),
 		WriteTimeout: config.Config.WRITETIMEOUT * 10,
