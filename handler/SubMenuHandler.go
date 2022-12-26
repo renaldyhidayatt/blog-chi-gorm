@@ -20,6 +20,19 @@ func NewSubMenuHandler(submenu dao.SubMenuDao) *subMenuHandler {
 	return &subMenuHandler{submenu: submenu}
 }
 
+// @Summary Get All Sub Menu
+// @Description REST API Sub Menu
+// @Accept  json
+// @Produce  json
+// @Tags Sub Menu Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /submenu/GetAll [get]
 func (h *subMenuHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -43,6 +56,18 @@ func (h *subMenuHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Find by Sub Menu
+// @Description REST API Sub Menu
+// @Accept  json
+// @Produce  json
+// @Tags Sub Menu Controller
+// @Param nama_menu path string true "Nama Menu"
+// @Param nama_sub_menu path string true "Nama Sub Menu"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /submenu/{nama_menu}/GetSubMenu/{nama_sub_menu} [get]
 func (h *subMenuHandler) FindBySubMenu(w http.ResponseWriter, r *http.Request) {
 	nama_menu := chi.URLParam(r, "nama_menu")
 	nama_submenu := chi.URLParam(r, "nama_submenu")
@@ -58,6 +83,18 @@ func (h *subMenuHandler) FindBySubMenu(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Create Sub Menu
+// @Description REST API Sub Menu
+// @Accept  json
+// @Produce  json
+// @Tags Sub Menu Controller
+// @Param id_menu path string true "Id Menu"
+// @Param requestBody body []request.SubMenuRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /submenu/{id_menu}/CreateSubMenu [post]
 func (h *subMenuHandler) CreateSubMenu(w http.ResponseWriter, r *http.Request) {
 	id_menu, err := strconv.ParseInt(chi.URLParam(r, "id_menu"), 10, 64)
 
@@ -94,6 +131,19 @@ func (h *subMenuHandler) CreateSubMenu(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Update Sub Menu
+// @Description REST API Sub Menu
+// @Accept  json
+// @Produce  json
+// @Tags Sub Menu Controller
+// @Param id_menu path string true "Id Menu"
+// @Param id_sub_menu path string true "Id Sub Menu"
+// @Param requestBody body request.SubMenuRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /submenu/{id_menu}/UpdateSubMenu/{id_sub_menu} [put]
 func (h *subMenuHandler) UpdateSubMenu(w http.ResponseWriter, r *http.Request) {
 	id_menu, err := strconv.ParseInt(chi.URLParam(r, "id_menu"), 10, 64)
 
@@ -138,6 +188,18 @@ func (h *subMenuHandler) UpdateSubMenu(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Delete Sub Menu
+// @Description REST API Sub Menu
+// @Accept  json
+// @Produce  json
+// @Tags Sub Menu Controller
+// @Param id_menu path string true "Id Menu"
+// @Param id_sub_menu path string true "Id Sub Menu"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /submenu/{id_menu}/DeleteSubMenu/{id_sub_menu} [delete]
 func (h *subMenuHandler) DeleteSubMenu(w http.ResponseWriter, r *http.Request) {
 	id_menu, err := strconv.ParseInt(chi.URLParam(r, "id_menu"), 10, 64)
 

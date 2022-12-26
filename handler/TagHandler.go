@@ -20,6 +20,19 @@ func NewTagHandler(tag dao.TagDao) *tagHandler {
 	return &tagHandler{tag: tag}
 }
 
+// @Summary Get All Tag
+// @Description REST API Tag
+// @Accept  json
+// @Produce  json
+// @Tags Tag Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /tag/GetAll [get]
 func (h *tagHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -43,6 +56,17 @@ func (h *tagHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Find by Tag
+// @Description REST API Tag
+// @Accept  json
+// @Produce  json
+// @Tags Tag Controller
+// @Param id_tag path string true "Id Tag"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /tag/{id_tag}/GetTag [get]
 func (h *tagHandler) FindTag(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id_tag"), 10, 64)
 
@@ -61,6 +85,17 @@ func (h *tagHandler) FindTag(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Create Tag
+// @Description REST API Tag
+// @Accept  json
+// @Produce  json
+// @Tags Tag Controller
+// @Param requestBody body request.TagRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /tag/CreateTag [post]
 func (h *tagHandler) CreateTag(w http.ResponseWriter, r *http.Request) {
 	var tags request.TagRequest
 	err := json.NewDecoder(r.Body).Decode(&tags)
@@ -89,6 +124,18 @@ func (h *tagHandler) CreateTag(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Update Tag
+// @Description REST API Tag
+// @Accept  json
+// @Produce  json
+// @Tags Tag Controller
+// @Param id_tag path string true "Id Tag"
+// @Param requestBody body request.TagRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /tag/{id_tag}/UpdateTag [put]
 func (h *tagHandler) UpdateTag(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id_tag"), 10, 64)
 
@@ -124,6 +171,17 @@ func (h *tagHandler) UpdateTag(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Delete Tag
+// @Description REST API Tag
+// @Accept  json
+// @Produce  json
+// @Tags Tag Controller
+// @Param id_tag path string true "Id Tag"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /tag/{id_tag}/DeleteTag [delete]
 func (h *tagHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id_tag"), 10, 64)
 

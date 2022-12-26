@@ -19,6 +19,18 @@ func NewPermissionHandler(permission dao.PermissionDao) *permissionHandler {
 	return &permissionHandler{permission: permission}
 }
 
+// @Summary Find Permission
+// @Description REST API Permission
+// @Accept  json
+// @Produce  json
+// @Tags Permission Controller
+// @Param id_user path string true "Id User"
+// @Param id_menu path string true "Id Menu"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /permission/{id_user}/GetPermission/{id_menu} [get]
 func (h *permissionHandler) FindPermission(w http.ResponseWriter, r *http.Request) {
 	id_user, err := strconv.ParseInt(chi.URLParam(r, "id_user"), 10, 64)
 
@@ -44,6 +56,17 @@ func (h *permissionHandler) FindPermission(w http.ResponseWriter, r *http.Reques
 
 }
 
+// @Summary Create Permission
+// @Description REST API Permission
+// @Accept  json
+// @Produce  json
+// @Tags Permission Controller
+// @Param requestBody body []request.PermissionRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /permission/CreatePermission [post]
 func (h *permissionHandler) CreatePermission(w http.ResponseWriter, r *http.Request) {
 	var permission []request.PermissionRequest
 	err := json.NewDecoder(r.Body).Decode(&permission)
@@ -64,6 +87,17 @@ func (h *permissionHandler) CreatePermission(w http.ResponseWriter, r *http.Requ
 
 }
 
+// @Summary Update Permission
+// @Description REST API Permission
+// @Accept  json
+// @Produce  json
+// @Tags Permission Controller
+// @Param requestBody body []request.PermissionRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /permission/UpdatePermission [put]
 func (h *permissionHandler) UpdatePermission(w http.ResponseWriter, r *http.Request) {
 	var permission []request.PermissionRequest
 	err := json.NewDecoder(r.Body).Decode(&permission)
@@ -84,6 +118,17 @@ func (h *permissionHandler) UpdatePermission(w http.ResponseWriter, r *http.Requ
 
 }
 
+// @Summary Delete Permission
+// @Description REST API Permission
+// @Accept  json
+// @Produce  json
+// @Tags Permission Controller
+// @Param id_permission path string true "Id Permission"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /permission/{id_permission}/DeletePermission [delete]
 func (h *permissionHandler) DeletePermission(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id_permission"), 10, 64)
 

@@ -33,6 +33,19 @@ func NewPostHandler(posts dao.PostDao) *postHandler {
 	return &postHandler{posts: posts}
 }
 
+// @Summary Get All Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/GetAll [get]
 func (h *postHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -56,6 +69,20 @@ func (h *postHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Create Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param requestBody formData request.PostRequest true "Form"
+// @Param photo formData file true "Photo"
+// @Param categories formData string true "Category"
+// @Param tags formData string true "Tag"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/create [post]
 func (h *postHandler) CreatePost(w http.ResponseWriter, r *http.Request) {
 
 	dir, err := os.Getwd()
@@ -181,6 +208,18 @@ func (h *postHandler) CreatePost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Find Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param id_article path string true "Id Article"
+// @Param id_post path string true "Id Post"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/{id_article}/FindPost/{id_post} [get]
 func (h *postHandler) FindPost(w http.ResponseWriter, r *http.Request) {
 	id_article, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 	id_post, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
@@ -196,6 +235,20 @@ func (h *postHandler) FindPost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Update Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param requestBody formData request.PostRequest true "Form"
+// @Param photo formData file false "Photo"
+// @Param categories formData string true "Category"
+// @Param tags formData string true "Tag"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/update [put]
 func (h *postHandler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 	publish, _ := strconv.ParseBool(r.FormValue("published"))
 	idPost, _ := strconv.ParseInt(r.FormValue("id_post"), 10, 64)
@@ -343,6 +396,18 @@ func (h *postHandler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Delete Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param id_article path string true "Id Article"
+// @Param id_post path string true "Id Post"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/{id_article}/DeletePost/{id_post} [delete]
 func (h *postHandler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	IdArticle, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 	IdPost, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
@@ -381,6 +446,18 @@ func (h *postHandler) DeletePost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Publish Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param id_article path string true "Id Article"
+// @Param id_post path string true "Id Post"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/{id_article}/PublishPost/{id_post} [post]
 func (h *postHandler) PublishPost(w http.ResponseWriter, r *http.Request) {
 	IdArticle, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 	IdPost, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
@@ -396,6 +473,18 @@ func (h *postHandler) PublishPost(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Cancel Post
+// @Description REST API Post
+// @Accept  json
+// @Produce  json
+// @Tags Post Controller
+// @Param id_article path string true "Id Article"
+// @Param id_post path string true "Id Post"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /posts/{id_article}/CancelPost/{id_post} [post]
 func (h *postHandler) CancelPost(w http.ResponseWriter, r *http.Request) {
 	IdArticle, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 	IdPost, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)

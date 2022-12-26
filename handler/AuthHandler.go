@@ -21,6 +21,16 @@ func NewAuthHandler(auth dao.AuthDao) *authHandler {
 	return &authHandler{auth: auth}
 }
 
+// @Summary Login
+// @Description REST API Auth
+// @Accept  json
+// @Produce  json
+// @Tags Auth Controller
+// @Param reqBody body request.LoginRequest true "Form Request"
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /auth/login [post]
 func (h *authHandler) CheckUser(w http.ResponseWriter, r *http.Request) {
 	var loginRequest request.LoginRequest
 
@@ -71,6 +81,18 @@ func (h *authHandler) CheckUser(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Forget Password
+// @Description REST API Auth
+// @Accept  json
+// @Produce  json
+// @Tags Auth Controller
+// @Param id path string true "Id User"
+// @Param reqBody body request.ForgetPasswordRequest true "Form Request"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /auth/{id}/ForgetPassword [post]
 func (h *authHandler) ForgotPassword(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 

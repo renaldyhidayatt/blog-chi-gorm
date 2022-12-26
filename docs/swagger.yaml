@@ -1,0 +1,2537 @@
+basePath: /api
+definitions:
+  request.ArticleRequest:
+    properties:
+      create_at:
+        type: string
+      icon:
+        type: string
+      id_article:
+        type: integer
+      nama_article:
+        type: string
+      slug:
+        type: string
+      update_at:
+        type: string
+    type: object
+  request.CategoryRequest:
+    properties:
+      create_at:
+        type: string
+      id_category:
+        type: integer
+      nama_category:
+        type: string
+      slug:
+        type: string
+      update_at:
+        type: string
+    type: object
+  request.ForgetPasswordRequest:
+    properties:
+      new_password:
+        type: string
+      old_password:
+        type: string
+    type: object
+  request.LoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  request.MenuRequest:
+    properties:
+      create_at:
+        type: string
+      icon:
+        type: string
+      id_menu:
+        type: integer
+      nama_menu:
+        type: string
+      path:
+        type: string
+      slug:
+        type: string
+      status:
+        type: boolean
+      update_at:
+        type: string
+    type: object
+  request.PermissionRequest:
+    properties:
+      create_at:
+        type: string
+      f_create:
+        type: integer
+      f_delete:
+        type: integer
+      f_publish:
+        type: integer
+      f_read:
+        type: integer
+      f_update:
+        type: integer
+      id_menu:
+        type: integer
+      id_permission:
+        type: integer
+      id_user:
+        type: integer
+    type: object
+  request.RoleRequest:
+    properties:
+      create_at:
+        type: string
+      id_role:
+        type: integer
+      nama_role:
+        type: string
+      status:
+        type: boolean
+      update_at:
+        type: string
+    type: object
+  request.SubMenuRequest:
+    properties:
+      create_at:
+        type: string
+      icon:
+        type: string
+      id_menu:
+        type: integer
+      id_sub_menu:
+        type: integer
+      nama_sub_menu:
+        type: string
+      path:
+        type: string
+      slug:
+        type: string
+      status:
+        type: boolean
+      update_at:
+        type: string
+    type: object
+  request.TagRequest:
+    properties:
+      create_at:
+        type: string
+      id_tag:
+        type: integer
+      nama_tag:
+        type: string
+      slug:
+        type: string
+      update_at:
+        type: string
+    type: object
+  request.UserRequest:
+    properties:
+      create_at:
+        type: string
+      email:
+        type: string
+      first_name:
+        type: string
+      id_role:
+        type: integer
+      id_user:
+        type: integer
+      last_name:
+        type: string
+      no_telp:
+        type: string
+      password:
+        type: string
+      photo:
+        type: string
+      status:
+        type: boolean
+      update_at:
+        type: string
+      username:
+        type: string
+    type: object
+  response.Response:
+    properties:
+      data: {}
+      message:
+        type: string
+      status:
+        type: integer
+    type: object
+host: localhost:5000
+info:
+  contact:
+    email: renaldyhidayatt@gmail.com
+    name: Renaldy Hidayat
+    url: https://github.com/renaldyhidayatt
+  description: Service Blog
+  termsOfService: http://swagger.io/terms/
+  title: Go Blog
+  version: "1.0"
+paths:
+  /UserAPI/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: REST API User
+      parameters:
+      - description: Id User
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Form Request
+        in: body
+        name: reqBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update User
+      tags:
+      - User Controller
+  /article/{id_article}/DeleteArticle:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Article
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Article
+      tags:
+      - Article Controller
+  /article/{id_article}/GetArticle:
+    get:
+      consumes:
+      - application/json
+      description: REST API Article
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find by Article
+      tags:
+      - Article Controller
+  /article/{id_article}/UpdateArticle:
+    put:
+      consumes:
+      - application/json
+      description: REST API Article
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.ArticleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Article
+      tags:
+      - Article Controller
+  /article/CreateArticle:
+    post:
+      consumes:
+      - application/json
+      description: REST API Article
+      parameters:
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.ArticleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Article
+      tags:
+      - Article Controller
+  /article/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Article
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Article
+      tags:
+      - Article Controller
+  /auth/{id}/ForgetPassword:
+    post:
+      consumes:
+      - application/json
+      description: REST API Auth
+      parameters:
+      - description: Id User
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Form Request
+        in: body
+        name: reqBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.ForgetPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Forget Password
+      tags:
+      - Auth Controller
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: REST API Auth
+      parameters:
+      - description: Form Request
+        in: body
+        name: reqBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      summary: Login
+      tags:
+      - Auth Controller
+  /category/{id}:
+    get:
+      consumes:
+      - application/json
+      description: REST API Category
+      parameters:
+      - description: Id Category
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find by Category
+      tags:
+      - Category Controller
+  /category/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Category
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Category
+      tags:
+      - Category Controller
+  /category/create:
+    post:
+      consumes:
+      - application/json
+      description: REST API Category
+      parameters:
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.CategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Category
+      tags:
+      - Category Controller
+  /category/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Category
+      parameters:
+      - description: Id Category
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Category
+      tags:
+      - Category Controller
+  /category/update/{id}:
+    put:
+      consumes:
+      - application/json
+      description: REST API Category
+      parameters:
+      - description: Id Category
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.CategoryRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Category
+      tags:
+      - Category Controller
+  /menu/{id_menu}/DeleteMenu:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Menu
+      parameters:
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Menu
+      tags:
+      - Menu Controller
+  /menu/{id_menu}/GetMenu:
+    get:
+      consumes:
+      - application/json
+      description: REST API Menu
+      parameters:
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find by Menu
+      tags:
+      - Menu Controller
+  /menu/{id_menu}/UpdateMenu:
+    put:
+      consumes:
+      - application/json
+      description: REST API Menu
+      parameters:
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.MenuRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Menu
+      tags:
+      - Menu Controller
+  /menu/CreateMenu:
+    post:
+      consumes:
+      - application/json
+      description: REST API Menu
+      parameters:
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.MenuRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Menu
+      tags:
+      - Menu Controller
+  /menu/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Menu
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Menu
+      tags:
+      - Menu Controller
+  /permission/{id_permission}/DeletePermission:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Permission
+      parameters:
+      - description: Id Permission
+        in: path
+        name: id_permission
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Permission
+      tags:
+      - Permission Controller
+  /permission/{id_user}/GetPermission/{id_menu}:
+    get:
+      consumes:
+      - application/json
+      description: REST API Permission
+      parameters:
+      - description: Id User
+        in: path
+        name: id_user
+        required: true
+        type: string
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find Permission
+      tags:
+      - Permission Controller
+  /permission/CreatePermission:
+    post:
+      consumes:
+      - application/json
+      description: REST API Permission
+      parameters:
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/request.PermissionRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Permission
+      tags:
+      - Permission Controller
+  /permission/UpdatePermission:
+    put:
+      consumes:
+      - application/json
+      description: REST API Permission
+      parameters:
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/request.PermissionRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Permission
+      tags:
+      - Permission Controller
+  /posts/{id_article}/CancelPost/{id_post}:
+    post:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      - description: Id Post
+        in: path
+        name: id_post
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Cancel Post
+      tags:
+      - Post Controller
+  /posts/{id_article}/DeletePost/{id_post}:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      - description: Id Post
+        in: path
+        name: id_post
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Post
+      tags:
+      - Post Controller
+  /posts/{id_article}/FindPost/{id_post}:
+    get:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      - description: Id Post
+        in: path
+        name: id_post
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find Post
+      tags:
+      - Post Controller
+  /posts/{id_article}/PublishPost/{id_post}:
+    post:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - description: Id Article
+        in: path
+        name: id_article
+        required: true
+        type: string
+      - description: Id Post
+        in: path
+        name: id_post
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Publish Post
+      tags:
+      - Post Controller
+  /posts/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Post
+      tags:
+      - Post Controller
+  /posts/create:
+    post:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - in: formData
+        name: create_at
+        type: string
+      - in: formData
+        name: create_by
+        type: string
+      - in: formData
+        name: description
+        type: string
+      - in: formData
+        name: id_article
+        type: integer
+      - in: formData
+        name: id_post
+        type: integer
+      - in: formData
+        name: nama_post
+        type: string
+      - in: formData
+        name: published
+        type: boolean
+      - in: formData
+        name: slug
+        type: string
+      - in: formData
+        name: update_at
+        type: string
+      - in: formData
+        name: update_by
+        type: string
+      - description: Photo
+        in: formData
+        name: photo
+        required: true
+        type: file
+      - description: Category
+        in: formData
+        name: categories
+        required: true
+        type: string
+      - description: Tag
+        in: formData
+        name: tags
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Post
+      tags:
+      - Post Controller
+  /posts/update:
+    put:
+      consumes:
+      - application/json
+      description: REST API Post
+      parameters:
+      - in: formData
+        name: create_at
+        type: string
+      - in: formData
+        name: create_by
+        type: string
+      - in: formData
+        name: description
+        type: string
+      - in: formData
+        name: id_article
+        type: integer
+      - in: formData
+        name: id_post
+        type: integer
+      - in: formData
+        name: nama_post
+        type: string
+      - in: formData
+        name: published
+        type: boolean
+      - in: formData
+        name: slug
+        type: string
+      - in: formData
+        name: update_at
+        type: string
+      - in: formData
+        name: update_by
+        type: string
+      - description: Photo
+        in: formData
+        name: photo
+        type: file
+      - description: Category
+        in: formData
+        name: categories
+        required: true
+        type: string
+      - description: Tag
+        in: formData
+        name: tags
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Post
+      tags:
+      - Post Controller
+  /role/{id_role}/DeleteRole:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Role
+      parameters:
+      - description: Id Role
+        in: path
+        name: id_role
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Role
+      tags:
+      - Role Controller
+  /role/{id_role}/UpdateRole:
+    put:
+      consumes:
+      - application/json
+      description: REST API Role
+      parameters:
+      - description: Id Role
+        in: path
+        name: id_role
+        required: true
+        type: string
+      - description: Form Request
+        in: body
+        name: reqBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.RoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Role
+      tags:
+      - Role Controller
+  /role/{role_name}/FindByRoleName:
+    post:
+      consumes:
+      - application/json
+      description: REST API Role
+      parameters:
+      - description: Role name
+        in: path
+        name: role_name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find Role
+      tags:
+      - Role Controller
+  /role/CreateRole:
+    post:
+      consumes:
+      - application/json
+      description: REST API Role
+      parameters:
+      - description: Form Request
+        in: body
+        name: reqBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.RoleRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Role
+      tags:
+      - Role Controller
+  /role/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Role
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Role
+      tags:
+      - Role Controller
+  /submenu/{id_menu}/CreateSubMenu:
+    post:
+      consumes:
+      - application/json
+      description: REST API Sub Menu
+      parameters:
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          items:
+            $ref: '#/definitions/request.SubMenuRequest'
+          type: array
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Sub Menu
+      tags:
+      - Sub Menu Controller
+  /submenu/{id_menu}/DeleteSubMenu/{id_sub_menu}:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Sub Menu
+      parameters:
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      - description: Id Sub Menu
+        in: path
+        name: id_sub_menu
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Sub Menu
+      tags:
+      - Sub Menu Controller
+  /submenu/{id_menu}/UpdateSubMenu/{id_sub_menu}:
+    put:
+      consumes:
+      - application/json
+      description: REST API Sub Menu
+      parameters:
+      - description: Id Menu
+        in: path
+        name: id_menu
+        required: true
+        type: string
+      - description: Id Sub Menu
+        in: path
+        name: id_sub_menu
+        required: true
+        type: string
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.SubMenuRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Sub Menu
+      tags:
+      - Sub Menu Controller
+  /submenu/{nama_menu}/GetSubMenu/{nama_sub_menu}:
+    get:
+      consumes:
+      - application/json
+      description: REST API Sub Menu
+      parameters:
+      - description: Nama Menu
+        in: path
+        name: nama_menu
+        required: true
+        type: string
+      - description: Nama Sub Menu
+        in: path
+        name: nama_sub_menu
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find by Sub Menu
+      tags:
+      - Sub Menu Controller
+  /submenu/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Sub Menu
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Sub Menu
+      tags:
+      - Sub Menu Controller
+  /tag/{id_tag}/DeleteTag:
+    delete:
+      consumes:
+      - application/json
+      description: REST API Tag
+      parameters:
+      - description: Id Tag
+        in: path
+        name: id_tag
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete Tag
+      tags:
+      - Tag Controller
+  /tag/{id_tag}/GetTag:
+    get:
+      consumes:
+      - application/json
+      description: REST API Tag
+      parameters:
+      - description: Id Tag
+        in: path
+        name: id_tag
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find by Tag
+      tags:
+      - Tag Controller
+  /tag/{id_tag}/UpdateTag:
+    put:
+      consumes:
+      - application/json
+      description: REST API Tag
+      parameters:
+      - description: Id Tag
+        in: path
+        name: id_tag
+        required: true
+        type: string
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.TagRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Update Tag
+      tags:
+      - Tag Controller
+  /tag/CreateTag:
+    post:
+      consumes:
+      - application/json
+      description: REST API Tag
+      parameters:
+      - description: Form
+        in: body
+        name: requestBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.TagRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create Tag
+      tags:
+      - Tag Controller
+  /tag/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API Tag
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All Tag
+      tags:
+      - Tag Controller
+  /user/{id}/:
+    get:
+      consumes:
+      - application/json
+      description: REST API User
+      parameters:
+      - description: Id User
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Find User
+      tags:
+      - User Controller
+  /user/{id}/UploadImage:
+    post:
+      consumes:
+      - application/json
+      description: REST API User
+      parameters:
+      - description: Id User
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Photo
+        in: formData
+        name: photo
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Upload Image User
+      tags:
+      - User Controller
+  /user/GetAll:
+    get:
+      consumes:
+      - application/json
+      description: REST API User
+      parameters:
+      - description: Limit
+        in: query
+        name: limit
+        type: integer
+      - description: Page
+        in: query
+        name: page
+        type: integer
+      - description: Sort
+        in: query
+        name: sort
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Get All User
+      tags:
+      - User Controller
+  /user/create:
+    post:
+      consumes:
+      - application/json
+      description: REST API User
+      parameters:
+      - description: Form Request
+        in: body
+        name: reqBody
+        required: true
+        schema:
+          $ref: '#/definitions/request.UserRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Create User
+      tags:
+      - User Controller
+  /user/delete/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: REST API User
+      parameters:
+      - description: Id User
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/response.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.Response'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/response.Response'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/response.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - BearerAuth: []
+      summary: Delete User
+      tags:
+      - User Controller
+securityDefinitions:
+  BearerAuth:
+    in: Header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

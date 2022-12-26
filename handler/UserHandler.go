@@ -32,6 +32,19 @@ func NewUserHandler(user dao.UserDao) *userHandler {
 	return &userHandler{user: user}
 }
 
+// @Summary Get All User
+// @Description REST API User
+// @Accept  json
+// @Produce  json
+// @Tags User Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /user/GetAll [get]
 func (h *userHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -56,6 +69,17 @@ func (h *userHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Create User
+// @Description REST API User
+// @Accept  json
+// @Produce  json
+// @Tags User Controller
+// @Param reqBody body request.UserRequest true "Form Request"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /user/create [post]
 func (h *userHandler) Create(w http.ResponseWriter, r *http.Request) {
 	var userReq request.UserRequest
 
@@ -95,6 +119,17 @@ func (h *userHandler) Create(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Find User
+// @Description REST API User
+// @Accept  json
+// @Produce  json
+// @Tags User Controller
+// @Param id path string true "Id User"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /user/{id}/ [get]
 func (h *userHandler) FindById(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 
@@ -108,6 +143,19 @@ func (h *userHandler) FindById(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
+
+// @Summary Update User
+// @Description REST API User
+// @Accept  json
+// @Produce  json
+// @Tags User Controller
+// @Param id path string true "Id User"
+// @Param reqBody body request.UserRequest true "Form Request"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /UserAPI/update/{id} [put]
 func (h *userHandler) Update(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	var userReq request.UserRequest
@@ -146,6 +194,17 @@ func (h *userHandler) Update(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Delete User
+// @Description REST API User
+// @Accept  json
+// @Produce  json
+// @Tags User Controller
+// @Param id path string true "Id User"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /user/delete/{id} [delete]
 func (h *userHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 
@@ -160,6 +219,18 @@ func (h *userHandler) Delete(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Upload Image User
+// @Description REST API User
+// @Accept  json
+// @Produce  json
+// @Tags User Controller
+// @Param id path string true "Id User"
+// @Param photo formData file true "Photo"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /user/{id}/UploadImage [post]
 func (h *userHandler) UploadImage(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 	find, err := h.user.FindById(Id)

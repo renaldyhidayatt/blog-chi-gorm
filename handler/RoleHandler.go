@@ -20,6 +20,19 @@ func NewRoleHandler(role dao.RoleDao) *roleHandler {
 	return &roleHandler{role: role}
 }
 
+// @Summary Get All Role
+// @Description REST API Role
+// @Accept  json
+// @Produce  json
+// @Tags Role Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /role/GetAll [get]
 func (h *roleHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -43,6 +56,17 @@ func (h *roleHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Find Role
+// @Description REST API Role
+// @Accept  json
+// @Produce  json
+// @Tags Role Controller
+// @Param role_name path string true "Role name"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /role/{role_name}/FindByRoleName [post]
 func (h *roleHandler) FindByNamaRole(w http.ResponseWriter, r *http.Request) {
 	name := chi.URLParam(r, "role_name")
 
@@ -74,6 +98,17 @@ func (h *roleHandler) FindById(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Create Role
+// @Description REST API Role
+// @Accept  json
+// @Produce  json
+// @Tags Role Controller
+// @Param reqBody body request.RoleRequest true "Form Request"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /role/CreateRole [post]
 func (h *roleHandler) Insert(w http.ResponseWriter, r *http.Request) {
 	var roleReq request.RoleRequest
 	err := json.NewDecoder(r.Body).Decode(&roleReq)
@@ -102,6 +137,18 @@ func (h *roleHandler) Insert(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Update Role
+// @Description REST API Role
+// @Accept  json
+// @Produce  json
+// @Tags Role Controller
+// @Param id_role path string true "Id Role"
+// @Param reqBody body request.RoleRequest true "Form Request"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /role/{id_role}/UpdateRole [put]
 func (h *roleHandler) Update(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id_role"), 10, 64)
 
@@ -137,6 +184,17 @@ func (h *roleHandler) Update(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Delete Role
+// @Description REST API Role
+// @Accept  json
+// @Produce  json
+// @Tags Role Controller
+// @Param id_role path string true "Id Role"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /role/{id_role}/DeleteRole [delete]
 func (h *roleHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id_role"), 10, 64)
 

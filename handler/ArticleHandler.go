@@ -20,6 +20,19 @@ func NewArticleHandler(article dao.ArticleDao) *articleHandler {
 	return &articleHandler{article: article}
 }
 
+// @Summary Get All Article
+// @Description REST API Article
+// @Accept  json
+// @Produce  json
+// @Tags Article Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /article/GetAll [get]
 func (h *articleHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -43,6 +56,17 @@ func (h *articleHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Find by Article
+// @Description REST API Article
+// @Accept  json
+// @Produce  json
+// @Tags Article Controller
+// @Param id_article path string true "Id Article"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /article/{id_article}/GetArticle [get]
 func (h *articleHandler) FindArticle(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 
@@ -56,6 +80,17 @@ func (h *articleHandler) FindArticle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Create Article
+// @Description REST API Article
+// @Accept  json
+// @Produce  json
+// @Tags Article Controller
+// @Param requestBody body request.ArticleRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /article/CreateArticle [post]
 func (h *articleHandler) CreateArticle(w http.ResponseWriter, r *http.Request) {
 	var articles request.ArticleRequest
 	err := json.NewDecoder(r.Body).Decode(&articles)
@@ -84,6 +119,18 @@ func (h *articleHandler) CreateArticle(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Update Article
+// @Description REST API Article
+// @Accept  json
+// @Produce  json
+// @Tags Article Controller
+// @Param id_article path string true "Id Article"
+// @Param requestBody body request.ArticleRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /article/{id_article}/UpdateArticle [put]
 func (h *articleHandler) UpdateArticle(w http.ResponseWriter, r *http.Request) {
 	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 
@@ -114,8 +161,19 @@ func (h *articleHandler) UpdateArticle(w http.ResponseWriter, r *http.Request) {
 
 }
 
+// @Summary Delete Article
+// @Description REST API Article
+// @Accept  json
+// @Produce  json
+// @Tags Article Controller
+// @Param id_article path string true "Id Article"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /article/{id_article}/DeleteArticle [delete]
 func (h *articleHandler) DeleteArticle(w http.ResponseWriter, r *http.Request) {
-	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusInternalServerError, err)

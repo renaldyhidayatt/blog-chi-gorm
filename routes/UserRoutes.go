@@ -23,6 +23,7 @@ func NewUserRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 		r.Get("/{id}", handler.FindById)
 		r.Put("/update/{id}", handler.Update)
 		r.Delete("/delete/{id}", handler.Delete)
+		r.Post("/{id}/UploadImage", handler.UploadImage)
 
 	})
 }

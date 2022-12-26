@@ -20,6 +20,19 @@ func NewCategoryHandler(category dao.CategoryDao) *categoryHandler {
 	return &categoryHandler{category: category}
 }
 
+// @Summary Get All Category
+// @Description REST API Category
+// @Accept  json
+// @Produce  json
+// @Tags Category Controller
+// @Param limit query int false "Limit"
+// @Param page query int false "Page"
+// @Param sort query string false "Sort"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /category/GetAll [get]
 func (h *categoryHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	pagination, err := utils.SortPagination(r)
 
@@ -43,6 +56,17 @@ func (h *categoryHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Find by Category
+// @Description REST API Category
+// @Accept  json
+// @Produce  json
+// @Tags Category Controller
+// @Param id path string true "Id Category"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /category/{id} [get]
 func (h *categoryHandler) FindCategory(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 
@@ -61,6 +85,17 @@ func (h *categoryHandler) FindCategory(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+// @Summary Create Category
+// @Description REST API Category
+// @Accept  json
+// @Produce  json
+// @Tags Category Controller
+// @Param requestBody body request.CategoryRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /category/create [post]
 func (h *categoryHandler) CreateCategory(w http.ResponseWriter, r *http.Request) {
 	var category request.CategoryRequest
 	err := json.NewDecoder(r.Body).Decode(&category)
@@ -89,6 +124,18 @@ func (h *categoryHandler) CreateCategory(w http.ResponseWriter, r *http.Request)
 
 }
 
+// @Summary Update Category
+// @Description REST API Category
+// @Accept  json
+// @Produce  json
+// @Tags Category Controller
+// @Param id path string true "Id Category"
+// @Param requestBody body request.CategoryRequest true "Form"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /category/update/{id} [put]
 func (h *categoryHandler) UpdateCategory(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 
@@ -125,6 +172,17 @@ func (h *categoryHandler) UpdateCategory(w http.ResponseWriter, r *http.Request)
 
 }
 
+// @Summary Delete Category
+// @Description REST API Category
+// @Accept  json
+// @Produce  json
+// @Tags Category Controller
+// @Param id path string true "Id Category"
+// @Security BearerAuth
+// @Success 200 {object} response.Response
+// @Success 201 {object} response.Response
+// @Failure 500,400,404,403 {object} response.Response
+// @Router /category/delete/{id} [delete]
 func (h *categoryHandler) Delete(w http.ResponseWriter, r *http.Request) {
 	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
 
