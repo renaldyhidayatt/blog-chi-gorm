@@ -409,8 +409,19 @@ func (h *postHandler) UpdatePost(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /posts/{id_article}/DeletePost/{id_post} [delete]
 func (h *postHandler) DeletePost(w http.ResponseWriter, r *http.Request) {
-	IdArticle, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
-	IdPost, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
+	IdArticle, err := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	IdPost, err := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	find, err := h.posts.FindPost(IdArticle, IdPost)
 
@@ -420,6 +431,12 @@ func (h *postHandler) DeletePost(w http.ResponseWriter, r *http.Request) {
 	}
 
 	dir, err := os.Getwd()
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
+
 	fileLocation := ""
 
 	if find.Image != "" {
@@ -459,8 +476,19 @@ func (h *postHandler) DeletePost(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /posts/{id_article}/PublishPost/{id_post} [post]
 func (h *postHandler) PublishPost(w http.ResponseWriter, r *http.Request) {
-	IdArticle, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
-	IdPost, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
+	IdArticle, err := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
+
+	IdPost, err := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	res, err := h.posts.PublishPost(IdArticle, IdPost)
 
@@ -486,8 +514,18 @@ func (h *postHandler) PublishPost(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /posts/{id_article}/CancelPost/{id_post} [post]
 func (h *postHandler) CancelPost(w http.ResponseWriter, r *http.Request) {
-	IdArticle, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
-	IdPost, _ := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
+	IdArticle, err := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
+	IdPost, err := strconv.ParseInt(chi.URLParam(r, "id_post"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	res, err := h.posts.CancelPost(IdArticle, IdPost)
 

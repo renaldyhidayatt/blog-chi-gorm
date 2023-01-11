@@ -206,7 +206,12 @@ func (h *userHandler) Update(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /user/delete/{id} [delete]
 func (h *userHandler) Delete(w http.ResponseWriter, r *http.Request) {
-	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	get, err := h.user.Delete(Id)
 
@@ -232,7 +237,13 @@ func (h *userHandler) Delete(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /user/{id}/UploadImage [post]
 func (h *userHandler) UploadImage(w http.ResponseWriter, r *http.Request) {
-	Id, _ := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
+
 	find, err := h.user.FindById(Id)
 
 	if err != nil {
@@ -268,7 +279,7 @@ func (h *userHandler) UploadImage(w http.ResponseWriter, r *http.Request) {
 	contentType := handler.Header.Get("Content-Type")
 
 	if !CheckType(contentType) {
-		response.ResponseError(w, http.StatusInternalServerError, errors.New("Format file tidak didukung"))
+		response.ResponseError(w, http.StatusInternalServerError, errors.New("format file tidak didukung"))
 		return
 	}
 
@@ -300,8 +311,7 @@ func (h *userHandler) UploadImage(w http.ResponseWriter, r *http.Request) {
 		b[i] = randomString[rand.Intn(len(randomString))]
 	}
 
-	filename := handler.Filename
-	filename = fmt.Sprintf("%s%s", string(b), filepath.Ext(handler.Filename))
+	filename := fmt.Sprintf("%s%s", string(b), filepath.Ext(handler.Filename))
 
 	fileLocation := ""
 

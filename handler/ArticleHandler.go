@@ -68,7 +68,12 @@ func (h *articleHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /article/{id_article}/GetArticle [get]
 func (h *articleHandler) FindArticle(w http.ResponseWriter, r *http.Request) {
-	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	res, err := h.article.FindArticle(Id)
 
@@ -132,10 +137,15 @@ func (h *articleHandler) CreateArticle(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /article/{id_article}/UpdateArticle [put]
 func (h *articleHandler) UpdateArticle(w http.ResponseWriter, r *http.Request) {
-	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_article"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	var article request.ArticleRequest
-	err := json.NewDecoder(r.Body).Decode(&article)
+	err = json.NewDecoder(r.Body).Decode(&article)
 
 	if err != nil {
 		response.ResponseError(w, http.StatusUnprocessableEntity, err)

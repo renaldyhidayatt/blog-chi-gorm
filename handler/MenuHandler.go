@@ -68,7 +68,12 @@ func (h *menuHandler) GetAll(w http.ResponseWriter, r *http.Request) {
 // @Failure 500,400,404,403 {object} response.Response
 // @Router /menu/{id_menu}/GetMenu [get]
 func (h *menuHandler) FindByMenu(w http.ResponseWriter, r *http.Request) {
-	Id, _ := strconv.ParseInt(chi.URLParam(r, "id_menu"), 10, 64)
+	Id, err := strconv.ParseInt(chi.URLParam(r, "id_menu"), 10, 64)
+
+	if err != nil {
+		response.ResponseError(w, http.StatusBadRequest, err)
+		return
+	}
 
 	get, err := h.menu.FindByMenu(Id)
 
