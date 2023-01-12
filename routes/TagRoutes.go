@@ -18,9 +18,9 @@ func NewTagRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 	router.Route(prefix, func(r chi.Router) {
 		r.Use(middlewares.MiddlewareAuthentication)
 		r.Get("/GetAll", handler.GetAll)
-		r.Get("/{id_tag}/GetTag", handler.FindTag)
+		r.Get("/{id_tag:[0-9]+}/GetTag", handler.FindTag)
 		r.Post("/CreateTag", handler.CreateTag)
-		r.Put("/{id_tag}/UpdateTag", handler.UpdateTag)
-		r.Delete("/{id_tag}/DeleteTag", handler.Delete)
+		r.Put("/{id_tag:[0-9]+}/UpdateTag", handler.UpdateTag)
+		r.Delete("/{id_tag:[0-9]+}/DeleteTag", handler.Delete)
 	})
 }

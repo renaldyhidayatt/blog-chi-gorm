@@ -17,9 +17,9 @@ func NewPermissionRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 
 	router.Route(prefix, func(r chi.Router) {
 		r.Use(middlewares.MiddlewareAuthentication)
-		r.Get("/{id_user}/GetPermission/{id_menu}", handler.FindPermission)
+		r.Get("/{id_user:[0-9]+}/GetPermission/{id_menu:[0-9]+}", handler.FindPermission)
 		r.Post("/CreatePermission", handler.CreatePermission)
 		r.Put("/UpdatePermission", handler.UpdatePermission)
-		r.Delete("/{id_permission}/DeletePermission", handler.DeletePermission)
+		r.Delete("/{id_permission:[0-9]+}/DeletePermission", handler.DeletePermission)
 	})
 }

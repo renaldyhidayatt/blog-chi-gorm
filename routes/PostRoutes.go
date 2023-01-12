@@ -20,10 +20,10 @@ func NewPostRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 
 		r.Get("/GetAll", handler.GetAll)
 		r.Post("/create", handler.CreatePost)
-		r.Get("/{id_article}/FindPost/{id_post}", handler.FindPost)
+		r.Get("/{id_article:[0-9]+}/FindPost/{id_post:[0-9]+}", handler.FindPost)
 		r.Put("/update", handler.UpdatePost)
-		r.Delete("/{id_article}/delete/{id_post}", handler.DeletePost)
-		r.Post("/{id_article}/PublishPost/{id_post}", handler.PublishPost)
-		r.Post("/{id_article}/CancelPost/{id_post}", handler.CancelPost)
+		r.Delete("/{id_article}/delete/{id_post:[0-9]+}", handler.DeletePost)
+		r.Post("/{id_article}/PublishPost/{id_post:[0-9]+}", handler.PublishPost)
+		r.Post("/{id_article}/CancelPost/{id_post:[0-9]+}", handler.CancelPost)
 	})
 }

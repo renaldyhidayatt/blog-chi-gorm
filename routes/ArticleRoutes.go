@@ -19,9 +19,9 @@ func NewArticleRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 		r.Use(middlewares.MiddlewareAuthentication)
 
 		r.Get("/GetAll", handler.GetAll)
-		r.Get("/{id_article}/GetArticle", handler.FindArticle)
+		r.Get("/{id_article:[0-9]+}/GetArticle", handler.FindArticle)
 		r.Post("/CreateArticle", handler.CreateArticle)
-		r.Put("/{id_article}/UpdateArticle", handler.UpdateArticle)
-		r.Delete("/{id_article}/DeleteArticle", handler.DeleteArticle)
+		r.Put("/{id:[0-9]+}/UpdateArticle", handler.UpdateArticle)
+		r.Delete("/{id_article:[0-9]+}/DeleteArticle", handler.DeleteArticle)
 	})
 }

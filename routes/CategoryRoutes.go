@@ -20,9 +20,9 @@ func NewCategoryRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 
 		r.Get("/GetAll", handler.GetAll)
 		r.Post("/create", handler.CreateCategory)
-		r.Get("/{id}", handler.FindCategory)
-		r.Put("/update/{id}", handler.UpdateCategory)
-		r.Delete("/delete/{id}", handler.Delete)
+		r.Get("/{id:[0-9]+}", handler.FindCategory)
+		r.Put("/update/{id:[0-9]+}", handler.UpdateCategory)
+		r.Delete("/delete/{id:[0-9]+}", handler.Delete)
 
 	})
 }

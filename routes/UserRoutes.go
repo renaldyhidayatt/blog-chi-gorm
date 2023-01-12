@@ -20,10 +20,10 @@ func NewUserRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 
 		r.Get("/GetAll", handler.GetAll)
 		r.Post("/create", handler.Create)
-		r.Get("/{id}", handler.FindById)
-		r.Put("/update/{id}", handler.Update)
-		r.Delete("/delete/{id}", handler.Delete)
-		r.Post("/{id}/UploadImage", handler.UploadImage)
+		r.Get("/{id:[0-9]+}", handler.FindById)
+		r.Put("/update/{id:[0-9]+}", handler.Update)
+		r.Delete("/delete/{id:[0-9]+}", handler.Delete)
+		r.Post("/{id:[0-9]+}/UploadImage", handler.UploadImage)
 
 	})
 }

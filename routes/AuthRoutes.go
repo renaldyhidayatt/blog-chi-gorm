@@ -19,6 +19,6 @@ func NewAuthRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 		r.Use(middlewares.MiddlewareAuthentication)
 
 		r.Post("/DoLogin", handlerAuth.CheckUser)
-		r.Post("/{id}/ForgotPassword", handlerAuth.ForgotPassword)
+		r.Post("/{id:[0-9]+}/ForgotPassword", handlerAuth.ForgotPassword)
 	})
 }

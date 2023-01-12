@@ -21,7 +21,7 @@ func NewRoleRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 		r.Get("/GetAll", handler.GetAll)
 		r.Post("/{role_name}/FindByRoleName", handler.FindByNamaRole)
 		r.Post("/CreateRole", handler.Insert)
-		r.Put("/{id_role}/UpdateRole", handler.Update)
+		r.Put("/{id_role:[0-9]+} ubah parameter ini jadi role_name/UpdateRole", handler.Update)
 		r.Delete("/{id_role}/DeleteRole", handler.Delete)
 	})
 }

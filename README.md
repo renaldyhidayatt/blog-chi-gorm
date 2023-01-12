@@ -1,10 +1,10 @@
 ### Blog Chi
 
-Aplikasi sederhana menggunakan Fiber dan Query Builder Ent
+Aplikasi sederhana menggunakan Chi dan Gorm
 
 ### Teknologi yang digunakan
 
 - Golang
 - Chi
 - Postgres
-- Ent(Query Builder)
+- Gorm

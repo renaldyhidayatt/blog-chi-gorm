@@ -19,8 +19,8 @@ func NewSubMenuRoutes(prefix string, db *gorm.DB, router *chi.Mux) {
 		r.Use(middlewares.MiddlewareAuthentication)
 		r.Get("/GetAll", handler.GetAll)
 		r.Get("/{nama_menu}/GetSubMenu/{nama_sub_menu}", handler.FindBySubMenu)
-		r.Post("/{id_menu}/CreateSubMenu", handler.CreateSubMenu)
-		r.Put("/{id_menu}/UpdateSubMenu/{id_sub_menu}", handler.UpdateSubMenu)
-		r.Delete("/{id_menu}/DeleteSubMenu/{id_sub_menu}", handler.DeleteSubMenu)
+		r.Post("/{id_menu:[0-9]+}/CreateSubMenu", handler.CreateSubMenu)
+		r.Put("/{id_menu:[0-9]+}/UpdateSubMenu/{id_sub_menu:[0-9]+}", handler.UpdateSubMenu)
+		r.Delete("/{id_menu:[0-9]+}/DeleteSubMenu/{id_sub_menu:[0-9]+}", handler.DeleteSubMenu)
 	})
 }
